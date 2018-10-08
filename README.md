@@ -1,5 +1,6 @@
 # thirdProjectMedicines
 Main:
+
 git clone https://github.com/ELedenyov/thirdProjectMedicines.git
 
 cd thirdTaskSpringDB
@@ -12,6 +13,7 @@ java -jar gs-gradle-1.0-SNAPSHOT.jar
 
 
 Report:
+
 cd thirdTaskSpringDB/report
 
 gradle build
