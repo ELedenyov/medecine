@@ -36,7 +36,7 @@ dependencies {
 jar {
     baseName = 'gs-gradle'
     manifest {
-        attributes 'Main-Class': 'by.itsm.fertigi.Runner'
+        attributes 'Main-Class': 'by.fertigi.itsm.Runner'
     }
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
