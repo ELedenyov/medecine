@@ -3,7 +3,7 @@ Main:
 
 git clone https://github.com/ELedenyov/thirdProjectMedicines.git
 
-cd thirdTaskSpringDB
+cd thirdProjectMedicines/thirdTaskSpringDB
 
 gradle build
 
@@ -14,7 +14,7 @@ java -jar gs-gradle-1.0-SNAPSHOT.jar
 
 Report:
 
-cd thirdTaskSpringDB/report
+cd thirdProjectMedicines/thirdTaskSpringDB/report
 
 gradle build
 
