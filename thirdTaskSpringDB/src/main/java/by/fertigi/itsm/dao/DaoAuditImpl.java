@@ -1,8 +1,6 @@
 package by.fertigi.itsm.dao;
 
 import by.fertigi.itsm.entity.AuditOperation;
-import by.fertigi.itsm.exception.BusinessException;
-import by.fertigi.itsm.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
