@@ -24,7 +24,7 @@ public class DaoStateImpl implements DaoState{
 
     @Override
     public State getById(int id) {
-        String sql = "select * from states where id = ?";
+        String sql = "select * from states where idState = ?";
         return template.queryForObject(sql, new Object[]{ id }, mapper);
     }
 

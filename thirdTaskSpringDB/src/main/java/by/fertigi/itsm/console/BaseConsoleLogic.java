@@ -1,7 +1,5 @@
 package by.fertigi.itsm.console;
 
-import by.fertigi.itsm.annotations.AuditOperationAnnotation;
-
 import java.util.Scanner;
 
 public abstract class BaseConsoleLogic {

@@ -1,5 +1,6 @@
 package by.fertigi.itsm.service.transaction;
 
+import by.fertigi.itsm.annotations.AuditOperationAnnotation;
 import by.fertigi.itsm.dao.CrudOperation;
 import by.fertigi.itsm.dao.DaoTransaction;
 import by.fertigi.itsm.entity.Patient;
@@ -28,9 +29,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void createTransaction(Transaction transaction) throws Exception {
-        Patient patient = daoPatient.read(transaction.getIdPatient());
-        Product product = daoProduct.read(transaction.getIdProduct());
-        if (patient.getIdState() == product.getIdState()){
+        Patient patient = daoPatient.read(transaction.getPatient().getId());
+        Product product = daoProduct.read(transaction.getProduct().getId());
+        transaction.setPatient(patient);
+        transaction.setProduct(product);
+        if (patient.getState().getId() == product.getState().getId()){
             daoTransaction.createTransaction(transaction);
         } else {
             System.out.println("the product is not for sale in the patient's state");

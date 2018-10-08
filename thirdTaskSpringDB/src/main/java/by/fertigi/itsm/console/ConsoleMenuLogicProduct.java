@@ -1,9 +1,9 @@
 package by.fertigi.itsm.console;
 
 import by.fertigi.itsm.entity.Product;
+import by.fertigi.itsm.entity.State;
 import by.fertigi.itsm.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +23,7 @@ public class ConsoleMenuLogicProduct extends BaseConsoleLogic{
             String name = scanner.nextLine();
             printEnterState();
             int state = Integer.parseInt(scanner.nextLine());
-            service.create(new Product(name, state));
+            service.create(new Product(name, new State(state)));
             System.out.println("product create!");
             System.out.println();
             System.out.println();
@@ -59,7 +59,7 @@ public class ConsoleMenuLogicProduct extends BaseConsoleLogic{
             String name = scanner.nextLine();
             printEnterState();
             int state = Integer.parseInt(scanner.nextLine());
-            service.update(new Product(id, name, state));
+            service.update(new Product(id, name, new State(state)));
             System.out.println("Product updating!");
             System.out.println();
             System.out.println();

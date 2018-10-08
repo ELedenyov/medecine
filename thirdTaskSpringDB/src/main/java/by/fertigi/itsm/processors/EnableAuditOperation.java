@@ -1,8 +1,5 @@
 package by.fertigi.itsm.processors;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class EnableAuditOperation {
     private boolean enable;
 

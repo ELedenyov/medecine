@@ -2,7 +2,6 @@ package by.fertigi.itsm.mappers;
 
 import by.fertigi.itsm.entity.Entity;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.Nullable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

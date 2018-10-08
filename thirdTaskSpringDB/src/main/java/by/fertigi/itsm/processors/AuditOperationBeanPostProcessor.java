@@ -2,34 +2,31 @@ package by.fertigi.itsm.processors;
 
 import by.fertigi.itsm.annotations.AuditOperationAnnotation;
 import by.fertigi.itsm.entity.AuditOperation;
-import by.fertigi.itsm.exception.BusinessException;
-import by.fertigi.itsm.exception.DatabaseException;
 import by.fertigi.itsm.service.audit.AuditService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
     private Map<String, Object> beans = new HashMap<>();
 
     @Autowired
-    @Qualifier("auditService")
     @Lazy
     private AuditService auditService;
 
     @Autowired
+    @Lazy
     private EnableAuditOperation enableAuditOperation;
 
     @Override
@@ -43,7 +40,7 @@ public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(enableAuditOperation.isEnable() && beans.containsKey(beanName)){
+        if(beans.containsKey(beanName)){
             Class originalBeanClass = beans.get(beanName).getClass();
             Object proxyBean = Proxy.newProxyInstance(originalBeanClass.getClassLoader(),
                     originalBeanClass.getInterfaces(),
@@ -51,21 +48,26 @@ public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
                         Annotation annotation = originalBeanClass.getMethod(
                                 method.getName(),
                                 method.getParameterTypes()).getAnnotation(AuditOperationAnnotation.class);
-                        if (annotation != null) {
+                        if (annotation != null && enableAuditOperation.isEnable()) {
                             final String action = ((AuditOperationAnnotation) annotation).operation();
                             AuditOperation auditOperation = new AuditOperation();
                             auditOperation.setAction(action);
                             auditOperation.setDate(new Date(System.currentTimeMillis()));
+                            String allArgs = Arrays.stream(args)
+                                    .map(Object::toString)
+                                    .collect(Collectors.joining(";"));
                             try {
                                 Object returnObject = method.invoke(bean, args);
-                                auditOperation.setStatus("operation is done");
-                                auditService.auditCreate(auditOperation);
-                                System.out.println("bpp: "+ auditOperation);
+                                auditOperation.setStatus("operation is done, args: " + allArgs);
                                 return returnObject;
-                            } catch (BusinessException | InvocationTargetException | DatabaseException e){
-                                auditOperation.setStatus("operation not done, message: " + e.getMessage() + ", reason: " + e.getClass());
+                            } catch (Exception e){
+                                auditOperation.setStatus("operation not done, message: " + e.getMessage()
+                                        + ", reason: "
+                                        + e.getClass()
+                                        + ", args: " + allArgs);
+                                throw new Exception(e);
+                            } finally {
                                 auditService.auditCreate(auditOperation);
-                                throw new Exception();
                             }
                         } else {
                             return method.invoke(bean, args);

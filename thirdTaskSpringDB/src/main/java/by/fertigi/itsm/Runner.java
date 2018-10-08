@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Runner {
     public static void main(String[] args) throws Exception {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfigMain.class);
         ConsoleMenuLogicMain console = context.getBean(ConsoleMenuLogicMain.class);
         console.logicMainMenu();
     }

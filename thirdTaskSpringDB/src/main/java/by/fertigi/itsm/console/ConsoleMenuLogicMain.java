@@ -33,8 +33,8 @@ public class ConsoleMenuLogicMain {
         System.out.println("Select operation:");
         System.out.println("1.Crud operation with Patient");
         System.out.println("2.Crud operation with Product");
-        System.out.println("3.Crud operation with State");
-        System.out.println("4.Audit operations");
+        System.out.println("3.Operation with State");
+        System.out.println("4.On and off audit operations");
         System.out.println("5.Transaction menu");
         System.out.println();
         System.out.println("0.exit");

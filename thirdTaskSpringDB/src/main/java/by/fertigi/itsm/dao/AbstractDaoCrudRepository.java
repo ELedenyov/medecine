@@ -16,7 +16,11 @@ public abstract class AbstractDaoCrudRepository<T extends Entity> implements Cru
     }
 
     public T read(int id){
-        String sql = "SELECT * FROM " + mapper.getTableName() + " where id = ?";
+        String sql = "SELECT * FROM " + mapper.getTableName() +
+                " INNER JOIN states ON " +
+                mapper.getTableName() + ".state_id = states.idState " +
+                "where " + mapper.getTableName() + ".id = ?";
+        System.out.println(sql);
         return template.query(sql, new Object[]{id}, mapper).get(0);
     }
 
@@ -26,7 +30,9 @@ public abstract class AbstractDaoCrudRepository<T extends Entity> implements Cru
     }
 
     public List<T> getAll() {
-        String sql = "SELECT * FROM " + mapper.getTableName();
+        String sql = "SELECT * FROM " + mapper.getTableName() +
+                " INNER JOIN states ON " +
+                mapper.getTableName() + ".state_id = states.idState";
         return template.query(sql, mapper);
     }
 }

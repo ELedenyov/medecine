@@ -20,7 +20,7 @@ public class StateRowMapper implements IEntityRowMapper<State>{
     @Override
     public State mapRow(ResultSet resultSet, int i) throws SQLException {
         State state = new State();
-        state.setId(resultSet.getInt("id"));
+        state.setId(resultSet.getInt("idState"));
         state.setName(resultSet.getString("name"));
         state.setCode(resultSet.getString("code"));
         return state;

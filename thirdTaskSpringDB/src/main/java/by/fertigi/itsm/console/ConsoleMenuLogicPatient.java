@@ -1,9 +1,9 @@
 package by.fertigi.itsm.console;
 
 import by.fertigi.itsm.entity.Patient;
+import by.fertigi.itsm.entity.State;
 import by.fertigi.itsm.service.patient.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +23,7 @@ public class ConsoleMenuLogicPatient extends BaseConsoleLogic{
         //штат вводить имя, номер выбрать из списока штатов или что.
         printEnterState();
         int state = Integer.parseInt(scanner.nextLine());
-        service.create(new Patient(phone, state));
+        service.create(new Patient(phone, new State(state)));
         System.out.println("patient create!");
         System.out.println();
         System.out.println();
@@ -35,7 +35,7 @@ public class ConsoleMenuLogicPatient extends BaseConsoleLogic{
         System.out.println("This menu is for reading a patient");
         System.out.println("Enter id patient:");
         String line = scanner.nextLine();
-        Patient read = (Patient)service.read(Integer.parseInt(line));
+        Patient read = service.read(Integer.parseInt(line));
         System.out.println(read);
         System.out.println();
         System.out.println();
@@ -51,7 +51,7 @@ public class ConsoleMenuLogicPatient extends BaseConsoleLogic{
         String phone = scanner.nextLine();
         printEnterState();
         int state = Integer.parseInt(scanner.nextLine());
-        service.update(new Patient(id, phone, state));
+        service.update(new Patient(id, phone, new State(state)));
         System.out.println("patient updating!");
         System.out.println();
         System.out.println();

@@ -1,5 +1,7 @@
 package by.fertigi.itsm.console;
 
+import by.fertigi.itsm.entity.Patient;
+import by.fertigi.itsm.entity.Product;
 import by.fertigi.itsm.entity.Transaction;
 import by.fertigi.itsm.service.transaction.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,7 @@ public class ConsoleMenuLogicTransaction {
         System.out.println("Enter id product: ");
         int idProduct = Integer.parseInt(scanner.nextLine());
         Date date = new Date(System.currentTimeMillis());
-        Transaction transaction = new Transaction(idPatient, idProduct, date);
+        Transaction transaction = new Transaction(new Patient(idPatient), new Product(idProduct), date);
         try {
             service.createTransaction(transaction);
         } catch (Exception e){

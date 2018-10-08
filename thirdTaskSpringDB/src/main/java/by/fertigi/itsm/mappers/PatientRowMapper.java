@@ -1,6 +1,7 @@
 package by.fertigi.itsm.mappers;
 
 import by.fertigi.itsm.entity.Patient;
+import by.fertigi.itsm.entity.State;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +22,12 @@ public class PatientRowMapper implements IEntityRowMapper<Patient>{
     public Patient mapRow(ResultSet resultSet, int i) throws SQLException {
         Patient patient = new Patient();
         patient.setId(resultSet.getInt("id"));
-        patient.setIdState(resultSet.getInt("state_id"));
         patient.setPhone(resultSet.getString("phone"));
-        System.out.println(patient);
+        State state = new State();
+        state.setId(resultSet.getInt("state_id"));
+        state.setName(resultSet.getString("name"));
+        state.setCode(resultSet.getString("code"));
+        patient.setState(state);
         return patient;
     }
 }

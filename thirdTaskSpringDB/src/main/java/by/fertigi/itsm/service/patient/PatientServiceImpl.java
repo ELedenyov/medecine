@@ -17,6 +17,7 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public void create(Patient patient) throws Exception {
+        System.out.println("create");
         dao.create(patient);
     }
 
