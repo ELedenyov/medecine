@@ -22,4 +22,4 @@ cd build/libs
 
 java -jar report-1.0-SNAPSHOT.jar
 
-view report in folder thirdTaskSpringDB/report/build/libs/reports
+view report in folder thirdProjectMedicines/thirdTaskSpringDB/report/build/libs/reports
