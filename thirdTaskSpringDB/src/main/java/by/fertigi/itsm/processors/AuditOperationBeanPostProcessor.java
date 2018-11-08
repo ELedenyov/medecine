@@ -2,7 +2,8 @@ package by.fertigi.itsm.processors;
 
 import by.fertigi.itsm.annotations.AuditOperationAnnotation;
 import by.fertigi.itsm.entity.AuditOperation;
-import by.fertigi.itsm.service.audit.AuditService;
+import by.fertigi.itsm.repository.domain.IAuditRepository;
+import by.fertigi.itsm.repository.domain.impl.AuditOperationRepository;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -23,7 +24,7 @@ public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
 
     @Autowired
     @Lazy
-    private AuditService auditService;
+    private IAuditRepository auditRepository;
 
     @Autowired
     @Lazy
@@ -42,7 +43,7 @@ public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if(beans.containsKey(beanName)){
             Class originalBeanClass = beans.get(beanName).getClass();
-            Object proxyBean = Proxy.newProxyInstance(originalBeanClass.getClassLoader(),
+            return Proxy.newProxyInstance(originalBeanClass.getClassLoader(),
                     originalBeanClass.getInterfaces(),
                     (proxy, method, args) -> {
                         Annotation annotation = originalBeanClass.getMethod(
@@ -50,32 +51,20 @@ public class AuditOperationBeanPostProcessor implements BeanPostProcessor {
                                 method.getParameterTypes()).getAnnotation(AuditOperationAnnotation.class);
                         if (annotation != null && enableAuditOperation.isEnable()) {
                             final String action = ((AuditOperationAnnotation) annotation).operation();
-                            AuditOperation auditOperation = new AuditOperation();
-                            auditOperation.setAction(action);
-                            auditOperation.setDate(new Date(System.currentTimeMillis()));
-                            String allArgs = Arrays.stream(args)
-                                    .map(Object::toString)
-                                    .collect(Collectors.joining(";"));
+                            boolean success = true;
                             try {
-                                Object returnObject = method.invoke(bean, args);
-                                auditOperation.setStatus("operation is done, args: " + allArgs);
-                                return returnObject;
+                                return method.invoke(bean, args);
                             } catch (Exception e){
-                                auditOperation.setStatus("operation not done, message: " + e.getMessage()
-                                        + ", reason: "
-                                        + e.getClass()
-                                        + ", args: " + allArgs);
+                                success = false;
                                 throw new Exception(e);
                             } finally {
-                                auditService.auditCreate(auditOperation);
+                                auditRepository.create(success, UserHolder.getCurrentUser(), action);
                             }
                         } else {
                             return method.invoke(bean, args);
                         }
                     });
-            return proxyBean;
-        } else {
-            return bean;
         }
+        return bean;
     }
 }

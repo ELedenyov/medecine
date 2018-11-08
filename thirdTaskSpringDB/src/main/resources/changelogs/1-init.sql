@@ -4,7 +4,7 @@
 
 create table states
 (
-  idState int auto_increment
+  id int auto_increment
     primary key,
   name varchar(255) not null,
   code varchar(255) not null,
@@ -24,7 +24,7 @@ create table patients
   constraint patients_phone_uindex
   unique (phone),
   constraint patients_states_id_fk
-  foreign key (state_id) references states (idState)
+  foreign key (state_id) references states (id)
 )
 ;
 
@@ -37,7 +37,7 @@ create table products
   constraint products_name_uindex
   unique (name),
   constraint products_states_id_fk
-  foreign key (state_id) references states (idState)
+  foreign key (state_id) references states (id)
 )
 ;
 

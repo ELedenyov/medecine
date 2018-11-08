@@ -1,7 +1,7 @@
 package by.fertigi.itsm.report.repositiry;
 
-import by.fertigi.itsm.report.mapper.TransactionMapper;
 import by.fertigi.itsm.entity.Transaction;
+import by.fertigi.itsm.report.mapper.TransactionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

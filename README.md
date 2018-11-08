@@ -1,4 +1,9 @@
 # thirdProjectMedicines
+4 task
+User login: adm
+User password: 123
+
+
 Main:
 
 git clone https://github.com/ELedenyov/thirdProjectMedicines.git

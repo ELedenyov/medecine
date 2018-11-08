@@ -23,11 +23,22 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context-support', version: '5.0.8.RELEASE'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.8.RELEASE'
     compile group: 'org.springframework', name: 'spring-tx', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '5.0.8.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
 
     //https://mvnrepository.com/artifact/org.liquibase/liquibase-core
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.6.2'
+
+    compile group: 'org.vibur', name: 'vibur-dbcp', version: '21.2'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+
+    compile group: 'com.googlecode.concurrentlinkedhashmap', name: 'concurrentlinkedhashmap-lru', version: '1.4.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.21.0'

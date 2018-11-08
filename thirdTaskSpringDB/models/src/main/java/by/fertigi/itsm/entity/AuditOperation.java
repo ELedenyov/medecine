@@ -1,27 +1,45 @@
 package by.fertigi.itsm.entity;
 
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
-public class AuditOperation implements Entity{
+@Entity(name = "auditoperations")
+@Table(name = "auditoperations")
+public class AuditOperation implements IEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date")
     private Date date;
+
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "action")
     private String action;
+
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private  User user;
 
     public AuditOperation() {
     }
 
-    public AuditOperation(Date date, String status, String action) {
+    public AuditOperation(Date date, String status, String action, User user) {
         this.date = date;
         this.status = status;
         this.action = action;
+        this.user = user;
     }
 
-    public AuditOperation(int id, Date date, String status, String action) {
-        this.id = id;
-        this.date = date;
-        this.status = status;
-        this.action = action;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

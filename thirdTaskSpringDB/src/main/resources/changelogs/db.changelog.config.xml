@@ -8,5 +8,12 @@
 
     <include file="1-init.sql" relativeToChangelogFile="true"/>
     <include file="2-add_states.sql" relativeToChangelogFile="true"/>
+    <include file="3-create_table_user.sql" relativeToChangelogFile="true"/>
+    <include file="4-add_fields_patient.sql" relativeToChangelogFile="true"/>
+    <include file="5-add_fields_product.sql" relativeToChangelogFile="true"/>
+    <include file="6-add_fields_transaction.sql" relativeToChangelogFile="true"/>
+    <include file="7-add_fields_audit.sql" relativeToChangelogFile="true"/>
+    <include file="8-add_fields_state.sql" relativeToChangelogFile="true"/>
+    <include file="9-insert_user.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
