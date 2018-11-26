@@ -1,6 +1,13 @@
 package by.fertigi.itsm.report;
 
 import by.fertigi.itsm.report.mapper.TransactionMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -60,5 +67,35 @@ public class AppConfigReport {
 
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         return builder.build(configuration);
+    }
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        CachingConnectionFactory connectionFactory =
+                new CachingConnectionFactory("localhost");
+        return connectionFactory;
+    }
+
+    @Bean
+    public AmqpAdmin amqpAdmin() {
+        return new RabbitAdmin(connectionFactory());
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate() {
+        return new RabbitTemplate(connectionFactory());
+    }
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory myRabbitListenerContainerFactory() {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory());
+        factory.setMaxConcurrentConsumers(5);
+        return factory;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        return  new ObjectMapper();
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <include file="changelogs/1-init.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/2-add_states.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/3-create_table_user.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/4-add_fields_patient.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/5-add_fields_product.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/6-add_fields_transaction.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/7-add_fields_audit.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/8-add_fields_state.sql" relativeToChangelogFile="true"/>
+    <include file="changelogs/9-insert_user.sql" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

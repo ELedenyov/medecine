@@ -14,6 +14,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
 
     @Autowired
     public TransactionRepositoryImpl(TransactionMapper transactionMapper) {
+        System.out.println("constr TransactionRepositoryImpl");
         this.mapper = transactionMapper;
     }
 

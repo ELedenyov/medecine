@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    changeLog: classpath:db/liquibaseConfig.xml
+  profiles:
+    active: test
+  datasource:
+    platform: mysql
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    username: sa
+    password:
+logging:
+  level:
+    org.springframework: info

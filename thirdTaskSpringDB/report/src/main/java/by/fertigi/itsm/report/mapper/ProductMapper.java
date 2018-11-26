@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ProductMapper {
-    @Select("SELECT * FROM products INNER JOIN states ON products.state_id = states.idState WHERE products.id = #{product_id}")
+    @Select("SELECT * FROM products INNER JOIN states ON products.state_id = states.id WHERE products.id = #{product_id}")
     @Results(value = {
             @Result(property = "id", column = "id"),
             @Result(property = "name", column = "name"),

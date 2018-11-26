@@ -8,7 +8,7 @@ import java.util.Date;
 public class AuditOperation implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date")
@@ -43,11 +43,11 @@ public class AuditOperation implements IEntity {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

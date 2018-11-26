@@ -1,0 +1,32 @@
+spring:
+  auditoperation:
+    enable: true
+  security:
+    salt: $2a$10$TaOYwJXDRN1ygwjW9DbFCO
+  liquibase:
+    changeLog: classpath:db/liquibaseConfig.xml
+  application:
+    name: front
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/thirdtask?nullNamePatternMatchesAll=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+      hibernate:
+        dialect:                       org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+logging:
+  level:
+    org.springframework: info
+    by.fertigi.itsm: debug

@@ -1,0 +1,45 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+group 'by.fertigi.itsm'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile project(":models")
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp'
+
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    apt 'org.projectlombok:lombok:1.18.2'
+
+    testCompile group: 'com.h2database', name: 'h2'
+
+    compile group: 'org.springframework.data', name: 'spring-data-jpa'
+
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+}
