@@ -1,32 +1,18 @@
-# thirdProjectMedicines
-4 task
+Front:
 
 User login: adm
 
 User password: 123
 
 
-Main:
+install db - mysql 5.7+
 
-git clone https://github.com/ELedenyov/thirdProjectMedicines.git
+  CREATE DATABASE `thirdtask`
+  
+  add user - 'root' and add user password 'root'
+  
+install gradle - 4.10+
 
-cd thirdProjectMedicines/thirdTaskSpringDB
+install RabbitMQ
 
-gradle build
-
-cd build/libs
-
-java -jar gs-gradle-1.0-SNAPSHOT.jar
-
-
-Report:
-
-cd thirdProjectMedicines/thirdTaskSpringDB/report
-
-gradle build
-
-cd build/libs
-
-java -jar report-1.0-SNAPSHOT.jar
-
-view report in folder thirdProjectMedicines/thirdTaskSpringDB/report/build/libs/reports
+git clone https://github.com/ELedenyov/medecine.git
